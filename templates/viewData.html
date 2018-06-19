@@ -1,0 +1,24 @@
+{% extends 'navBar.html' %}
+
+{% block link %}
+	<link rel="stylesheet" href="{{url_for('static', filename='css/viewData.css')}}">
+{% endblock %}
+
+{% block content %}
+	<div>
+		<ul>
+			{% for nameFile in listNameFiles %}
+				<li>
+					<a href="/viewData/{{ nameFile[:-9] }}">
+						{{ nameFile[:-9] }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+
+	</div>
+	<h1>{{ hello }}</h1>
+	<form action="" method="post">
+	<input type="text" name="name" value="{{ request.form.name }}">
+	</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+html {
+	width: 99%;
+	height: 100%;
+}
+
+ul.menu {
+	width: 20%;
+	background-color: #008080;
+	border: 1px double #333;  
+	list-style: none;
+}
+
+ul.menu li{
+	height: 100%;
+	width: 100%;
+	display: table;
+}
+ul.menu a {
+	display: table-cell;
+	height: 100%;
+	width: 100%;
+	text-decoration: none; 
+	color:  #F0FFFF;
+}
+
+ul.menu a:hover{
+    background-color: #333;
+    color: #F0FFFF;
+}

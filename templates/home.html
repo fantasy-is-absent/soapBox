@@ -1,7 +1,15 @@
 {% extends 'navBar.html' %}
 
+{% block link %}
+	<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+{% endblock %}
+
 {% block content %}
-	<h3>{% block title %}Home{% endblock %}</h3>
-	
-	<p>Hello, World!</p>
+	<ul class = "menu">
+		<li>
+			<h2>
+				<a href="/viewData">VIEW DATA</a>
+			</h2>
+		</li>
+	</ul>
 {% endblock %}

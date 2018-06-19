@@ -25,14 +25,15 @@ class parserSalaries(object):
 	def __init__(self, directory):
 		self.directory = directory
 		self.dataBase = dataBase(directory)
+		self.listNameFiles = self.getNameFiles()
 
 	def miniDataToDataBase(self):
-		os.chdir(self.directory)
-		for nameFile in glob.glob('*mini.csv'):
+		for nameFile in self.getNameFiles:
 			self.dataBase.creareTable(nameFile)
 
-
-
-
-parser = parserSalaries('/home/mira/projects/soapBox/parser/data/')
-parser.miniDataToDataBase()
+	def getNameFiles(self):
+		listNameFiles = []
+		os.chdir(self.directory)
+		for nameFile in glob.glob('*mini.csv'):
+			listNameFiles.append(nameFile)
+		return listNameFiles
