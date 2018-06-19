@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "stylesheet" href ="{{ url_for('static', filename='css/navBar.css')}}">
+
+		<title>soapBox</title>
+	</head>
+
+	<body>
+		<ul class ="navbar">
+      		<li><a href=""> HOME</a></li>
+    	</ul>
+
+    	{% block content %}{% endblock %}
+	</body>
+</html>
