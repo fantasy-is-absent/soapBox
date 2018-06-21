@@ -1,26 +1,34 @@
 {% extends 'navBar.html' %}
 
 {% block link %}
-	<link rel="stylesheet" href="{{url_for('static', filename='css/viewData.css')}}">
-	<link rel="stylesheet" href="{{url_for('static', filename='css/menu.css')}}">
+
 {% endblock %}
 
-{% block content %}
-	<div>
-		<ul class="menu">
-			{% for nameFile in listNameFiles %}
+{% block addNavBar %}
+	<li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        	CHOUSE DATA 
+        	<span class="caret"></span>
+        </a>
+        
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        	{% for nameFile in listNameFiles %}
 				<li>
 					<a href="/viewData/{{ nameFile[:-4] }}">
 						{{ nameFile[:-9] }}
 					</a>
 				</li>
 			{% endfor %}
-		</ul>
 
-	</div>
+        </ul>
+    </li>
+{% endblock %}
 
-	<div>
-		<table>
+{% block content %}
+{%if isTable%}
+
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover ">
 			<thead>
 				<tr>
 					<th>
@@ -80,5 +88,6 @@
 			</tbody>
 		</table>
 	</div>
+{%endif%}
 	
 {% endblock %}

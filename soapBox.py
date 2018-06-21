@@ -16,8 +16,9 @@ def viewData(nameFile = ''):
 	parser = parserSalaries('/home/mira/projects/soapBox/parser/data/')
 	db = dataBase()
 	if nameFile == '':
-		return render_template('viewData.html', listNameFiles = parser.listNameFiles)
-	return render_template('viewData.html', listNameFiles = parser.listNameFiles, db = db.selectData(nameFile))
+		return render_template('viewData.html', listNameFiles = parser.listNameFiles, isTable = False)
+	return render_template('viewData.html', listNameFiles = parser.listNameFiles, db = db.selectData(nameFile),
+		isTable = True)
 
 if __name__ == '__main__':
 	app.run(debug=True)

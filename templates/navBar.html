@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel = "stylesheet" href ="{{ url_for('static', filename='css/navBar.css')}}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script  src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+		
+
+ 		<link rel = "stylesheet" href ="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
 
 		{% block link %}{% endblock %}
 
@@ -9,9 +13,19 @@
 	</head>
 
 	<body>
-		<ul class ="navbar">
-      		<li><a href="/"> HOME</a></li>
-    	</ul>
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="navbar-header container-fluid">
+				<a class="navbar-brand" href="/">soapBox</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      			<ul class="nav navbar-nav">
+        			<li class="active"><a href="/">HOME</a></li>
+        			{% block addNavBar %}{% endblock %}
+    
+        		</ul>
+        	</div>
+		</nav>
 
     	{% block content %}{% endblock %}
 	</body>
