@@ -3,25 +3,29 @@
 
 {% block addNavBar %}
 	<li><a href="/viewData">VIEW DATA</a></li>
+	<li><a href="/viewSalary">VIEW SALARY</a></li>
 {% endblock %}
 
 {% block content %}
 
 
-
-
-<div id="myfirstchart" style="height: 250px;"></div>
-<script  src="{{ url_for('static', filename='js/chart.js') }}"></script>
+<canvas id="popChart" width="600" height="400"></canvas>
 <script>
-	var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: [
-    { year: '2008', value: 20 },
-    { year: '2009', value: 10 },
-    { year: '2010', value: 5 },
-    { year: '2011', value: 5 },
-    { year: '2012', value: 20 }],
-    options: options });
+var popCanvas = document.getElementById("popChart");
+var barChart = new Chart(popCanvas, {
+  type: 'bar',
+  data: {
+    labels: ["China", "India", "United States", "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh", "Russia", "Japan"],
+    datasets: [{
+      label: 'Population',
+      data: [1379302771, 1281935911, 326625791, 260580739, 207353391, 204924861, 190632261, 157826578, 142257519, 126451398],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.6)',
+  
+      ]
+    }]
+  }
+});
 </script>
 
 

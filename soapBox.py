@@ -25,6 +25,12 @@ def viewData(nameFile = ''):
 	return render_template('viewData.html', listNameFiles = parser.listNameFiles, db = db.selectData(nameFile))
 
 
+@app.route('/viewSalary')
+
+def viewSalary():
+	return render_template('viewSalary.html')
+
+
 if __name__ == '__main__':
 	app.run(debug=True)
 
