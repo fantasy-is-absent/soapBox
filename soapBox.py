@@ -1,24 +1,29 @@
 from flask import Flask, render_template, request, url_for
+from functools import wraps
 from parser.parser import parserSalaries
 from dataBase.dataBase import dataBase
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
 
 
 @app.route('/viewData')
+
+def viewDataStart():
+	parser = parserSalaries('/home/mira/projects/soapBox/parser/data/')
+	return render_template('viewDataStart.html', listNameFiles = parser.listNameFiles)
+
+
 @app.route('/viewData/<string:nameFile>')
 
 def viewData(nameFile = ''):
 	parser = parserSalaries('/home/mira/projects/soapBox/parser/data/')
 	db = dataBase()
-	if nameFile == '':
-		return render_template('viewData.html', listNameFiles = parser.listNameFiles, isTable = False)
-	return render_template('viewData.html', listNameFiles = parser.listNameFiles, db = db.selectData(nameFile),
-		isTable = True)
+	return render_template('viewData.html', listNameFiles = parser.listNameFiles, db = db.selectData(nameFile))
+
 
 if __name__ == '__main__':
 	app.run(debug=True)

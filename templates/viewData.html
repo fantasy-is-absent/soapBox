@@ -1,32 +1,6 @@
-{% extends 'navBar.html' %}
-
-{% block link %}
-
-{% endblock %}
-
-{% block addNavBar %}
-	<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        	CHOUSE DATA 
-        	<span class="caret"></span>
-        </a>
-        
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        	{% for nameFile in listNameFiles %}
-				<li>
-					<a href="/viewData/{{ nameFile[:-4] }}">
-						{{ nameFile[:-9] }}
-					</a>
-				</li>
-			{% endfor %}
-
-        </ul>
-    </li>
-{% endblock %}
+{% extends 'viewDataStart.html' %}
 
 {% block content %}
-{%if isTable%}
-
 	<div class="table-responsive">
 		<table class="table table-bordered table-hover ">
 			<thead>
@@ -77,17 +51,15 @@
 						</td>
 
 						<td>
-							{{ row[4] }}
-						</td>
+								{{ row[4] }}
+							</td>
 
-						<td>
-							{{ row[5].decode('utf-8') }}
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-{%endif%}
-	
+							<td>
+								{{ row[5].decode('utf-8') }}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 {% endblock %}

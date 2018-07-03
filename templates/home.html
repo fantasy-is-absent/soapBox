@@ -1,13 +1,28 @@
 {% extends 'navBar.html' %}
 
-{% block link %}
-
-{% endblock %}
 
 {% block addNavBar %}
 	<li><a href="/viewData">VIEW DATA</a></li>
 {% endblock %}
 
 {% block content %}
+
+
+
+
+<div id="myfirstchart" style="height: 250px;"></div>
+<script  src="{{ url_for('static', filename='js/chart.js') }}"></script>
+<script>
+	var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: [
+    { year: '2008', value: 20 },
+    { year: '2009', value: 10 },
+    { year: '2010', value: 5 },
+    { year: '2011', value: 5 },
+    { year: '2012', value: 20 }],
+    options: options });
+</script>
+
 
 {% endblock %}

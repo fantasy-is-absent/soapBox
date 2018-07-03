@@ -17,4 +17,4 @@ class parserSalaries(object):
 		os.chdir(self.directory)
 		for nameFile in glob.glob('*mini.csv'):
 			listNameFiles.append(nameFile)
-		return listNameFiles
+		return sorted(listNameFiles)
