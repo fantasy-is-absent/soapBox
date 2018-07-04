@@ -2,37 +2,31 @@
 
 
 {% block addNavBar %}
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            CHOUSE COMPARISON 
-            <span class="caret"></span>
-        </a>
+
+{% endblock %}
+
+{% block content %}
+<div>
+    <form method="POST">
+        <select name="nameTable">
+            {% for nameFile in listNameFiles %}
+				<option value="{{ nameFile[:-4] }}">
+					{{ nameFile[:-9] }}
+				</option>
+			{% endfor %}
+        </select>
+
+        <select name="chartOption">
+            <option value="town">TOWN</option>
+            <option value="post">POST</option>
+            <option value="experience">EXPERIENCE</option>
+            <option value="lenguage">LENGUAGE</option>
+        </select>
         
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li>
-                    <a href="/viewSalary/town">
-                        TOWN
-                    </a>
-                </li>
+        <button type="submit"> VIEW CHART </button>
+    </form>
+</div>
 
-                <li>
-                    <a href="/viewSalary/post">
-                        POST
-                    </a>
-                </li>
+{% block chart %} {% endblock %}
 
-                <li>
-                    <a href="/viewSalary/expetience">
-                        EXPETIENCE
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/viewSalary/lenguage">
-                        LENGUAGE
-                    </a>
-                </li>
-
-        </ul>
-    </li>
 {% endblock %}

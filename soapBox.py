@@ -5,7 +5,7 @@ from dataBase.dataBase import dataBase
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
     return render_template('home.html')
 
@@ -13,22 +13,34 @@ def home():
 @app.route('/viewData')
 
 def viewDataStart():
-	parser = parserSalaries('/home/mira/projects/soapBox/parser/data/')
-	return render_template('viewDataStart.html', listNameFiles = parser.listNameFiles)
+	data = parserSalaries('/home/mira/projects/soapBox/parser/data/')
+	return render_template('viewDataStart.html', listNameFiles = data.listNameFiles)
 
 
 @app.route('/viewData/<string:nameFile>')
 
 def viewData(nameFile = ''):
-	parser = parserSalaries('/home/mira/projects/soapBox/parser/data/')
 	db = dataBase()
-	return render_template('viewData.html', listNameFiles = parser.listNameFiles, db = db.selectData(nameFile))
+	return render_template('viewData.html', db = db.selectData(nameFile))
 
 
-@app.route('/viewSalary')
+@app.route('/viewSalary', methods=['GET'])
 
 def viewSalary():
-	return render_template('viewSalary.html')
+	data = parserSalaries('/home/mira/projects/soapBox/parser/data/')
+	return render_template('viewSalary.html', listNameFiles = data.listNameFiles)
+
+
+@app.route('/viewSalary', methods=['POST'])
+
+def viewChart():
+	chartOption = request.form['chartOption']
+	nameTable = request.form['nameTable']
+	print chartOption
+	print nameTable
+	print '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!' 
+	data = parserSalaries('/home/mira/projects/soapBox/parser/data/')
+	return render_template('viewChart.html', listNameFiles = data.listNameFiles)
 
 
 if __name__ == '__main__':
