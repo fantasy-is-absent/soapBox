@@ -1,11 +1,12 @@
 import glob, os
-from dataBase.dataBase import dataBase
 
-class parserSalaries(object):
+from dataBase.dataBase import DataBase
+
+class ParserSalaries:
 	
 	def __init__(self, directory):
 		self.directory = directory
-		self.dataBase = dataBase(directory)
+		self.dataBase = DataBase(directory)
 		self.listNameFiles = self.getNameFiles()
 
 	def miniDataToDataBase(self):

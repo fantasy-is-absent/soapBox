@@ -8,7 +8,7 @@
 {% block content %}
 <div>
     <form method="POST">
-        <select name="nameTable">
+        <select name="nameFile">
             {% for nameFile in listNameFiles %}
 				<option value="{{ nameFile[:-4] }}">
 					{{ nameFile[:-9] }}
@@ -19,13 +19,31 @@
         <select name="chartOption">
             <option value="town">TOWN</option>
             <option value="post">POST</option>
-            <option value="experience">EXPERIENCE</option>
             <option value="lenguage">LENGUAGE</option>
         </select>
         
         <button type="submit"> VIEW CHART </button>
     </form>
 </div>
+
+<script>
+    function get_len() {
+        $.ajax({
+            type: "POST",
+            url: "/viewSalary",
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                var json = jQuery.parseJSON(response)
+                $('#len').html(json.len)
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
 
 {% block chart %} {% endblock %}
 
