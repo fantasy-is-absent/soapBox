@@ -36,7 +36,8 @@ def viewSalary():
 def viewChart():
 	nameFile = request.form['nameFile']
 	chartOption = request.form['chartOption']
-	listAverageSalary = [x[1] for x in db.selectAverageSalary(nameFile, chartOption)]
-	listComparator = [x[0] for x in db.selectAverageSalary(nameFile, chartOption)] #div data on two lists for comfort
-	return render_template('viewSalary.html', listNameFiles = data.listNameFiles, 
+	listData =sorted(db.selectAverageSalary(nameFile, chartOption))
+	listAverageSalary = [x[1] for x in listData]
+	listComparator = [x[0] for x in listData] #div data on two lists for comfort
+	return render_template('chartAverageSalary.html', listNameFiles = data.listNameFiles, 
 		listAverageSalary = listAverageSalary, listComparator = listComparator, year = nameFile)
