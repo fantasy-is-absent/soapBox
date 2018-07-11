@@ -1,29 +1,49 @@
 {% extends 'navBar.html' %}
 
 {% block content %}
-<div>
-    <form method="POST">
-        <select name="nameFile">
-            {% for nameFile in listNameFiles %}
-				<option value="{{ nameFile[:-4] }}">
-					{{ nameFile[:-9] }}
-				</option>
-			{% endfor %}
-        </select>
+    <div class="row">
+        <div class="col-md-2">
+         <div class="form-group">
+            <form method="POST">
+                <label>Select type of chart</label>
 
-        <select name="chartOption">
-            <option value="town">TOWN</option>
-            <option value="post">POST</option>
-            <option value="lenguage">LENGUAGE</option>
-            <option value="experience">EXPETIENCE</option>
-        </select>
+                <select required name="chartType" class="form-control">
+                    <option value="line">LINE</option>
+                    <option value="bar">BAR</option>
+                    <option value="radar">RADAR</option>
+                    <option value="pie">PIE</option>
+                    <option value="doughnut">DOUGHNUT</option>
+                    <option value="polarArea">POLAR AREA</option>bubble
+                </select>
+
+                <label>Select type of comparator</label>
+
+                <select required name="chartOption" class="form-control">
+                    <option value="town">TOWN</option>
+                    <option value="post">POST</option>
+                    <option value="lenguage">LENGUAGE</option>
+                    <option value="experience">EXPETIENCE</option>
+                </select>
+
+                <label>Select data</label>
+
+                <select required name="nameFile" class="form-control">
+                    {% for nameFile in listNameFiles %}
+                        <option value="{{ nameFile[:-4] }}">
+                            {{ nameFile[:-9] }}
+                        </option>
+                     {% endfor %}
+                </select>
+
+                <button type="submit" class="btn btn-default"> VIEW CHART </button>
+            </form>
+            </div>
+        </div>
         
-        <button type="submit"> VIEW CHART </button>
-    </form>
-</div>
+        <div class="col-md-9">
+            <canvas id="popChart"></canvas>
 
-<canvas id="popChart" width = 100% height = 100%></canvas>
-
-{% block chart %} {% endblock %}
-
+            {% block chart %} {% endblock %}
+        </div>
+    </div>
 {% endblock %}
