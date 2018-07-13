@@ -17,7 +17,6 @@ class DataBase:
 		self.cursor.execute("SELECT id, town, salary, post, experience, lenguage FROM " + nameTable + ";")
 		return self.cursor
 
-	def selectAverageSalary(self, nameFile, nameColumn):
-		nameTable = 'data_' + nameFile
-		self.cursor.execute("SELECT DISTINCT " + nameColumn + ", AVG(salary) OVER (PARTITION BY " + nameColumn + ") FROM " + nameTable)
+	def selectAverageSalary(self,  nameColumn):
+		self.cursor.execute("SELECT DISTINCT " + nameColumn + ", AVG(salary) OVER (PARTITION BY " + nameColumn + ") FROM all_data;")
 		return self.cursor

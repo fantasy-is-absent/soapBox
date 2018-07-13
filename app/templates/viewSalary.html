@@ -7,7 +7,7 @@
             <form method="POST">
                 <label>Select type of chart</label>
 
-                <select required name="chartType" class="form-control">
+                <select name="chartType" class="form-control">
                     <option value="line">LINE</option>
                     <option value="bar">BAR</option>
                     <option value="radar">RADAR</option>
@@ -18,27 +18,42 @@
 
                 <label>Select type of comparator</label>
 
-                <select required name="chartOption" class="form-control">
+                <select name="chartOption" class="form-control">
                     <option value="town">TOWN</option>
                     <option value="post">POST</option>
                     <option value="lenguage">LENGUAGE</option>
                     <option value="experience">EXPETIENCE</option>
                 </select>
 
-                <label>Select data</label>
+                <label>Select data</label> <br>
+    
+                <input type="checkbox" name="none" value="none">none<br>
 
-                <select required name="nameFile" class="form-control">
-                    {% for nameFile in listNameFiles %}
-                        <option value="{{ nameFile[:-4] }}">
-                            {{ nameFile[:-9] }}
-                        </option>
-                     {% endfor %}
-                </select>
+                {% for year in [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018] %}
+                    <input type="checkbox" name="{{ year }}" value="{{ year }}">{{ year }}<br>
+                {% endfor %}
+
+
 
                 <button type="submit" class="btn btn-default"> VIEW CHART </button>
+
             </form>
             </div>
         </div>
+        
+        <script>
+            $cbx_group = $(":checkbox");
+
+            $('button[type="submit"]').on('click', function() {
+                $cbx_group.attr('required', true);
+    
+                $cbx_group.each(function(){
+                    if ($(this).is(":checked")){ 
+                        $cbx_group.removeAttr('required');
+                    }
+                });
+            });
+        </script>
         
         <div class="col-md-9">
             <canvas id="popChart"></canvas>
