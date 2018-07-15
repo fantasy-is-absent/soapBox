@@ -1,6 +1,7 @@
 from app import app
 from flask import Flask, render_template, request, url_for, jsonify
-from functools import wraps
+#from functools import wraps
+#from werkzeug.datastructures import MultiDict, ImmutableMultiDict
 
 from parser.parser import ParserSalaries
 from dataBase.dataBase import DataBase
@@ -35,9 +36,15 @@ def viewSalary():
 
 def viewChart():
 	chartOption = request.form['chartOption']
-	listData = sorted(db.selectAverageSalary(chartOption))# sorted data by comparators
-	listComparator = [x[0] for x in listData] #div data on two lists for comfort
-	listAverageSalary = [x[1] for x in listData]
-	return render_template('chartAverageSalary.html', listNameFiles = data.listNameFiles, 
-		listAverageSalary = listAverageSalary, listComparator = listComparator, year = "lol",
-		chartType = request.form['chartType'])
+	chartType = request.form['chartType']
+	listYears = []
+	lenListData = 2
+	if request.form['none'] != 'none':
+		listYears = request.form.getlist('none')
+		lenListData = 1 + len(listYears)
+	listData = sorted(db.selectAverageSalary(chartOption, listYears))# sorted data by comparators
+	listDataChart = []
+	for i in range(0, lenListData):
+		listDataChart.append([x[i] for x in listData]) #div data on two lists for comfort
+	return render_template('chartAverageSalary.html', listYears = listYears, 
+		listData = listDataChart, chartType = chartType)

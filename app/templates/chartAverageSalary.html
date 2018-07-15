@@ -7,20 +7,23 @@
         type: '{{ chartType }}',
         data: {
             labels: [
-                        {% for part in listComparator %}
-                            "{{ part }}",
-                        {% endfor %} 
+                    {% for part in listData[0] %}
+                     '{{ part }}',
+                    {% endfor %}
                     ],
-            datasets: [{
-                label: "average salary for {{ year[:-5] }}",
-                data: {{ listAverageSalary }},
-                backgroundColor: [
-                                    {% for part in listComparator %}
-                                        'rgba({{ range(1, 225) | random }}, {{ range(1, 225) | random }}, {{ range(1, 225) | random }}, 0.6)',
-                                    {% endfor %}
-                                ]
-            }]
+            datasets: [
+                {% for data in listData[1:] %}
+                    {
+                        label: "average salary for ",
+                        data: {{ data }},
+                backgroundColor: [ 'rgba({{ range(1, 225) | random }}, {{ range(1, 225) | random }}, {{ range(1, 225) | random }}, 0.6)']
+                    },
+                {% endfor %}
+                ]
         }
     });
 </script>
+{% for part in listData[0] %}
+                     '{{ part }}',
+                    {% endfor %}
 {% endblock %}
