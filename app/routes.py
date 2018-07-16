@@ -37,14 +37,11 @@ def viewSalary():
 def viewChart():
 	chartOption = request.form['chartOption']
 	chartType = request.form['chartType']
-	listYears = []
-	lenListData = 2
-	if request.form['none'] != 'none':
-		listYears = request.form.getlist('none')
-		lenListData = 1 + len(listYears)
+	listYears = request.form.getlist('years')
+	lenListData = 1 + len(listYears)
 	listData = sorted(db.selectAverageSalary(chartOption, listYears))# sorted data by comparators
 	listDataChart = []
 	for i in range(0, lenListData):
-		listDataChart.append([x[i] for x in listData]) #div data on two lists for comfort
+		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
 	return render_template('chartAverageSalary.html', listYears = listYears, 
 		listData = listDataChart, chartType = chartType)

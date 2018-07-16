@@ -1,29 +1,37 @@
 {% extends 'viewSalary.html' %}
 
 {% block chart %} 
-<script>
-    var popCanvas = document.getElementById("popChart");
-    var barChart = new Chart(popCanvas, {
-        type: '{{ chartType }}',
-        data: {
-            labels: [
+    <script>
+        var popCanvas = document.getElementById("popChart").getContext('2d');
+        
+        var barChart = new Chart(popCanvas, {
+            type: '{{ chartType }}',
+            
+            data: {
+                labels: [
                     {% for part in listData[0] %}
-                     '{{ part }}',
+                        '{{ part }}',
                     {% endfor %}
-                    ],
-            datasets: [
-                {% for data in listData[1:] %}
-                    {
-                        label: "average salary for ",
-                        data: {{ data }},
-                backgroundColor: [ 'rgba({{ range(1, 225) | random }}, {{ range(1, 225) | random }}, {{ range(1, 225) | random }}, 0.6)']
-                    },
-                {% endfor %}
+                ],
+                
+                datasets: [
+                    {% for i in range(listYears|length) %}
+                        {
+                            fill: true,
+                            
+                            label: "average salary for {{ listYears[i] }}",
+                            
+                            data: {{ listData[i+1] }},
+                            
+                            borderWidth: 1,
+                            
+                            borderColor:  'rgba({{ range(225)|random }}, {{ range(225)|random }}, {{ range(225)|random }}, 1)',
+                            
+                            backgroundColor:  'rgba({{ range(225)|random }}, {{ range(225)|random }}, {{ range(225)|random }}, 0.4)',
+                        },
+                    {% endfor %}
                 ]
-        }
-    });
-</script>
-{% for part in listData[0] %}
-                     '{{ part }}',
-                    {% endfor %}
+            }
+        });
+    </script>
 {% endblock %}

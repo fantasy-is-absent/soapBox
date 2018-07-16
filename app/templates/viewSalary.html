@@ -3,57 +3,43 @@
 {% block content %}
     <div class="row">
         <div class="col-md-2">
-         <div class="form-group">
             <form name = "form" method="POST">
                 <label>Select type of chart</label>
 
                 <select name="chartType" class="form-control">
                     <option value="line">LINE</option>
+                    
                     <option value="bar">BAR</option>
+                    
                     <option value="radar">RADAR</option>
-                    <option value="pie">PIE</option>
-                    <option value="doughnut">DOUGHNUT</option>
-                    <option value="polarArea">POLAR AREA</option>bubble
                 </select>
 
                 <label>Select type of comparator</label>
 
                 <select name="chartOption" class="form-control">
                     <option value="town">TOWN</option>
+                    
                     <option value="post">POST</option>
+                    
                     <option value="lenguage">LENGUAGE</option>
+                    
                     <option value="experience">EXPETIENCE</option>
                 </select>
 
                 <label>Select data</label> <br>
     
-                <input type="checkbox" name="none" value="none">none<br>
+                <input type="checkbox" name="years" value="allYears">all years<br>
+                
                 {% for year in [2011, 2012, 2013, 2014, 2015, 2016, 2017] %}
-                    <input type="checkbox" name="none" value="{{ year }}">{{ year }}<br>
+                    <input type="checkbox" name="years" value="{{ year }}">{{ year }}<br>
                 {% endfor %}
 
-
-
                 <button type="submit" class="btn btn-default"> VIEW CHART </button>
-
             </form>
-            </div>
         </div>
+       
+        <script  src="{{ url_for('static', filename='js/checkboxControl.js') }}"></script>
         
-        <script>
-            $cbx_group = $(":checkbox");
-
-            $('button[type="submit"]').on('click', function() {
-                $cbx_group.attr('required', true);
-    
-                $cbx_group.each(function(){
-                    if ($(this).is(":checked")){ 
-                        $cbx_group.removeAttr('required');
-                    }
-                });
-            });
-        </script>
-
         <div class="col-md-9">
             <canvas id="popChart"></canvas>
 
