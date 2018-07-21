@@ -31,6 +31,6 @@ class DataBase:
 				request = request[::-1]
 				request = request.replace('erehw ', ', (select distinct {0}, avg(salary) over (partition by {0}) as av from all_data where year = {1}) as y{1} where '.format(nameColumn, year)[::-1], 1)
 				request = request[::-1]
-		
+		request = request.replace(';', ' ORDER BY y{0}.{1};'.format(listYears[0], nameColumn)) # sorted data by comparators
 		self.cursor.execute(request)
-		return self.cursor
+		return list(self.cursor)

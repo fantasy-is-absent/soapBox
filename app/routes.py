@@ -39,7 +39,7 @@ def viewChart():
 	chartType = request.form['chartType']
 	listYears = request.form.getlist('years')
 	lenListData = 1 + len(listYears)
-	listData = sorted(db.selectAverageSalary(chartOption, listYears))# sorted data by comparators
+	listData = db.selectAverageSalary(chartOption, listYears)
 	listDataChart = []
 	for i in range(0, lenListData):
 		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
