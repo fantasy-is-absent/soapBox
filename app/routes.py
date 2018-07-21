@@ -28,7 +28,7 @@ def viewData(year = ''):
 @app.route('/viewSalary', methods=['GET'])
 
 def viewSalary():
-	return render_template('viewSalary.html', listAllYears = listAllYears)
+	return render_template('optionChartSalary.html', listAllYears = listAllYears)
 
 
 @app.route('/viewSalary', methods=['POST'])
@@ -42,5 +42,10 @@ def viewChart():
 	listDataChart = []
 	for i in range(0, lenListData):
 		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
-	return render_template('chartAverageSalary.html', listAllYears = listAllYears, listYears = listYears, 
+	return render_template('viewChart.html', listAllYears = listAllYears, listYears = listYears, 
 		listData = listDataChart, chartType = chartType)
+
+@app.route('/viewStatistics')
+
+def viewStatistics():
+	return render_template('optionChartStatistics.html', listAllYears = listAllYears)
