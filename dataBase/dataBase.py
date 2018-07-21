@@ -14,7 +14,7 @@ class DataBase:
 
 	def selectData(self, nameFile):
 		nameTable = 'data_' + nameFile
-		self.cursor.execute("SELECT id, town, salary, post, experience, lenguage FROM " + nameTable + ";")
+		self.cursor.execute("SELECT id, town, salary, post, experience, lenguage FROM " + nameTable + " ORDER BY id;")
 		return self.cursor
 
 	def selectAverageSalary(self,  nameColumn, listYears):
