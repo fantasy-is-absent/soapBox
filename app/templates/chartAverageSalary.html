@@ -2,7 +2,7 @@
 
 {% block chart %} 
     <script>
-        var popCanvas = document.getElementById("popChart").getContext('2d');
+        var popCanvas = document.getElementById("popChart");
         
         var barChart = new Chart(popCanvas, {
             type: '{{ chartType }}',
@@ -34,4 +34,5 @@
             }
         });
     </script>
+
 {% endblock %}

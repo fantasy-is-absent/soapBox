@@ -42,5 +42,5 @@ def viewChart():
 	listDataChart = []
 	for i in range(0, lenListData):
 		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
-	return render_template('chartAverageSalary.html', listYears = listYears, 
+	return render_template('chartAverageSalary.html', listAllYears = listAllYears, listYears = listYears, 
 		listData = listDataChart, chartType = chartType)
