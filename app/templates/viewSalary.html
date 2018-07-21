@@ -42,7 +42,7 @@
     
                 <input type="checkbox" name="years" value="allYears">all years<br>
                 
-                {% for year in [2011, 2012, 2013, 2014, 2015, 2016, 2017] %}
+                {% for year in listAllYears %}
                     <input type="checkbox" name="years" value="{{ year }}">{{ year }}<br>
                 {% endfor %}
 

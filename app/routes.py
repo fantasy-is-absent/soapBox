@@ -3,11 +3,10 @@ from flask import Flask, render_template, request, url_for, jsonify
 #from functools import wraps
 #from werkzeug.datastructures import MultiDict, ImmutableMultiDict
 
-from parser.parser import ParserSalaries
 from dataBase.dataBase import DataBase
 
-data = ParserSalaries('/home/mira/projects/soapBox/parser/data/')
 db = DataBase()
+listAllYears = [x for x in range(2011, 2019)] 
 
 @app.route('/')
 def home():
@@ -17,19 +16,19 @@ def home():
 @app.route('/viewData')
 
 def viewDataStart():
-	return render_template('viewDataStart.html', listNameFiles = data.listNameFiles)
+	return render_template('viewDataStart.html', listAllYears = listAllYears)
 
 
-@app.route('/viewData/<string:nameFile>')
+@app.route('/viewData/<string:year>')
 
-def viewData(nameFile = ''):
-	return render_template('viewData.html', db = db.selectData(nameFile))
+def viewData(year = ''):
+	return render_template('viewData.html', db = db.selectData(year), listAllYears = listAllYears)
 
 
 @app.route('/viewSalary', methods=['GET'])
 
 def viewSalary():
-	return render_template('viewSalary.html', listNameFiles = data.listNameFiles)
+	return render_template('viewSalary.html', listAllYears = listAllYears)
 
 
 @app.route('/viewSalary', methods=['POST'])

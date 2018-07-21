@@ -12,10 +12,13 @@ class DataBase:
 		self.cursor.execute("COPY " + nameTable + " FROM '" + self.directory + nameFile + "' DELIMITER ',' CSV HEADER;")
 		self.conn.commit()	
 
-	def selectData(self, nameFile):
-		nameTable = 'data_' + nameFile
-		self.cursor.execute("SELECT id, town, salary, post, experience, lenguage FROM " + nameTable + " ORDER BY id;")
-		return self.cursor
+	def selectData(self, year):
+		if year == 'allData':
+			request = "SELECT town, salary, post, experience, lenguage FROM all_data;"
+		else:
+			request = "SELECT town, salary, post, experience, lenguage FROM all_data WHERE year = " + year + ";"
+		self.cursor.execute(request)
+		return list(self.cursor)
 
 	def selectAverageSalary(self,  nameColumn, listYears):
 		request = ''

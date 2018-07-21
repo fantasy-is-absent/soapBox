@@ -9,13 +9,19 @@
         </a>
         
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        	{% for nameFile in listNameFiles %}
+        	{% for year in listAllYears %}
 				<li>
-					<a href="/viewData/{{ nameFile[:-4] }}">
-						{{ nameFile[:-9] }}
+					<a href="/viewData/{{ year }}">
+						{{ year }}
 					</a>
 				</li>
 			{% endfor %}
+            
+            <li>
+                    <a href="/viewData/allData">
+                        all data
+                    </a>
+            </li>
 
         </ul>
     </li>
