@@ -18,9 +18,9 @@
                     <option value="polarArea">POLAR AREA</option>
                 </select>
 
-                <label>Select type of comparator</label>
+                <label>Select type of data</label>
 
-                <select name="chartOption" class="form-control">
+                <select name="comparator" class="form-control">
                     <option value="town">TOWN</option>
                     
                     <option value="post">POST</option>
@@ -44,10 +44,10 @@
 
                 <label>Select data</label> <br>
     
-                <input type="radio" name="years" value="allYears" required>all years<br>
+                <input type="radio" name="year" value="allYears" required>all years<br>
                 
                 {% for year in listAllYears %}
-                    <input type="radio" name="years" value="{{ year }}" required>{{ year }}<br>
+                    <input type="radio" name="year" value="{{ year }}" required>{{ year }}<br>
                 {% endfor %}
 
                 <button type="submit" class="btn btn-default"> VIEW CHART </button>

@@ -1,7 +1,7 @@
-{% extends 'optionChart.html' %}
+{% extends 'optionChartStatistics.html' %}
 
 {% block namePage %}
-    viewSalary
+    viewStatistics
 {% endblock %}
 
 {% block chart %} 
@@ -19,24 +19,30 @@
                 ],
                 
                 datasets: [
-                    {% for i in range(listYears|length) %}
+                    
                         {
                             fill: true,
                             
-                            label: "average salary for {{ listYears[i] }}",
+                            label: "average salary for {{ year}}",
                             
-                            data: {{ listData[i+1] }},
+                            data: {{ listData[1] }},
                             
                             borderWidth: 1,
                             
-                            borderColor:  'rgba({{ range(225)|random }}, {{ range(225)|random }}, {{ range(225)|random }}, 1)',
+                            borderColor:  [
+                            {% for part in listData[0] %}
+                            'rgba({{ range(225)|random }}, {{ range(225)|random }}, {{ range(225)|random }}, 1)',
+                            {%endfor%}
+                            ],
                             
-                            backgroundColor:  'rgba({{ range(225)|random }}, {{ range(225)|random }}, {{ range(225)|random }}, 0.4)',
+                            backgroundColor:  [
+                            {% for part in listData[0] %}
+                            'rgba({{ range(225)|random }}, {{ range(225)|random }}, {{ range(225)|random }}, 0.4)',
+                            {%endfor%}],
                         },
-                    {% endfor %}
+                    
                 ]
             }
         });
     </script>
-
 {% endblock %}
