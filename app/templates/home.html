@@ -12,23 +12,37 @@
 
 {% block content %}
     <div class="row">
-    <form>
-        <div class="col-md-2"></div>
+		<script  src="{{ url_for('static', filename='js/numberControl.js') }}"></script>
+				
+    	<form>
+        	<div class="col-md-2"></div>
         
-        <div class="col-md-4">
-        	<h1>Fill out your data</h1>
+        	<div class="col-md-4">
+        		<h1>Fill out your data</h1>
 			
 				<label>Town</label>
-				
-				<input type="text" class="form-control" aria-describedby="basic-addon3" name="town" required>
 
+				<select class="form-control" name="town">
+					{% for town in ['Винница', 'Днепр', 'Донецк', 'Другой', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Киев', 'Кировоград', 'Кропивницкий', 'Луганск', 'Луцк', 'Львов', 'Мариуполь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Симферополь', 'Сумы', 'Тернополь', 'Тирасполь', 'Удаленно', 'Ужгород', 'Харьков', 'Херсон', 'Хмельницкий', 'Черкассы', 'Чернигов', 'Черновцы'] %}
+						<option value = '{{town}}'>{{town}}</option>
+					{% endfor %}
+					
+					<hr>
+					
+					<option disabled></option>
+					
+					<option value = 'Удаленно'>Удаленно</option>
+					
+					<option value = 'Другой'>Другой</option>
+				</select>
+ 
 				<label>Salary</label>
 				
-				<input type="text" class="form-control" aria-describedby="basic-addon3" name="salary" required>
+				<input type="text" class="form-control onlyNumber" aria-describedby="basic-addon3" name="salary" required>
 
 				<label>Change salary for last year</label>
 				
-				<input type="text" class="form-control" aria-describedby="basic-addon3" name="changesalary" required>
+				<input type="text" class="form-control onlyNumber" aria-describedby="basic-addon3" name="changesalary" required>
 
 				<label>Post in company</label>
 				
@@ -36,11 +50,11 @@
 
 				<label>Experience in IT</label>
 				
-				<input type="text" class="form-control" aria-describedby="basic-addon3" name="experience" required>
+				<input type="text" class="form-control onlyNumber" aria-describedby="basic-addon3" name="experience" required>
 
 				<label>Experience on current post</label>
 				
-				<input type="text" class="form-control" aria-describedby="basic-addon3" name="currentexperience" required>
+				<input type="text" class="form-control onlyNumber" aria-describedby="basic-addon3" name="currentexperience" required>
 
 				<label>Programing lenguage</label>
 				
@@ -49,68 +63,80 @@
 				<label>Specialization</label>
 				
 				<input type="text" class="form-control" aria-describedby="basic-addon3" name="specialization" required>
-
-				
-		</div>
+			</div>
  		
- 		<div class="col-md-4">
+ 			<div class="col-md-4">
 
- 		<label>Age</label>
+ 				<label>Age</label>
 				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="age" required>
+				<input type="text" class="form-control onlyNumber" aria-describedby="basic-addon3" name="age" required>
 
-		<label>Sex</label>
-				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="sex" required>
+				<label>Sex</label>
 
-		<label>Education</label>
-				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="education" required>
+				<select class="form-control" name="sex">
+					<option value="женский">женский</option>
 
-		<label>University</label>
+					<option value="мужской">мужской</option>
+				</select>
 				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="university" required>
+				<label>Education</label>
 
-		<label>Still student</label>
+				<select class="form-control" name="education">
+					{% for part in ['Высшее', 'Два высших', 'Кандидат', 'Незаконченное высшее', 'Среднее', 'Tехникум / Колледж'] %}
+						<option value="{{ part }}">{{ part }}</option>
+					{% endfor %}
+				</select>
 				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="stillstudent" required>
+				<label>University</label>
+				
+				<input type="text" class="form-control" aria-describedby="basic-addon3" name="university" required>
 
-		<label>Level english</label>
+				<label>Still student</label>
 				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="lvlenglish" required>
+				<select class="form-control" name="stillstudent">
+					<option value="True">True</option>
 
-		<label>Size company</label>
-				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="sizecompany" required>
+					<option value="False">False</option>
+				</select>
 
-		<label>Type company</label>
+				<label>Level english</label>
 				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="typecompany" required>
+				<select class="form-control" name="lvlenglish">
+					{% for part in ['выше среднего', 'ниже среднего', 'продвинутый', 'средний', 'элементарный'] %}
+						<option value="{{ part }}">{{ part }}</option>
+					{% endfor %}
+				</select>
+		
+				<label>Size company</label>
+				
+				<select class="form-control" name="sizecompany">
+					{% for part in ['до 10 человек', 'до 50 человек', 'до 200 человек', 'до 1000 человек', 'свыше 1000 человек'] %}
+						<option value="{{ part }}">{{ part }}</option>
+					{% endfor %}
+				</select>
 
-		<label>Subject area company</label>
+				<label>Type company</label>
 				
-		<input type="text" class="form-control" aria-describedby="basic-addon3" name="subjectarea" required>
+				<select class="form-control" name="typecompany">
+					{% for part in ['Аутсорсинговая', 'Аутстаффинговая', 'Продуктовая', 'Стартап'] %}
+						<option value="{{ part }}">{{ part }}</option>
+					{% endfor %}
+					
+					<option disabled="--"></option>
+
+					<option value="Другая">Другая</option>
+				</select>
+
+				<label>Subject area company</label>
+				
+				<input type="text" class="form-control" aria-describedby="basic-addon3" name="subjectarea" required>
  		
- 		<br>
+ 				<br>
 
- 		<button type="submit" class="btn btn-default"> SUBMIT </button>
-			
- 		</div>
+ 				<button type="submit" class="btn btn-default"> SUBMIT </button>
+			</div>
 
- 		<div class="col-md-2">
-<input type="tel">
-		<script>
-			$('[type=tel]').on('change', function(e) {
-  $(e.target).val($(e.target).val().replace(/[^\d\.]/g, ''))
-})
-$('[type=tel]').on('keypress', function(e) {
-  keys = ['0','1','2','3','4','5','6','7','8','9','.']
-  return keys.indexOf(event.key) > -1
-})
-		</script>
- 		</div>
- 	</form>
+ 			<div class="col-md-2"></div>
+ 		</form>
  	</div>
-
-
 {% endblock %}
