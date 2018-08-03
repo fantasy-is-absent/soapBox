@@ -25,7 +25,7 @@ def viewData(year = ''):
 	return render_template('viewData.html', db = db.selectData(year), listAllYears = listAllYears)
 
 
-@app.route('/viewSalary', methods=['GET'])
+@app.route('/viewSalary', methods=['GET', 'POST'])
 
 def viewOptionChartSalary():
 	return render_template('optionChartSalary.html', listAllYears = listAllYears)
@@ -60,3 +60,15 @@ def viewChartStatistics():
 	listDataChart = [[x[0] for x in listData], [x[1] for x in listData]]
 	return render_template('viewChartStatistics.html', listAllYears = listAllYears, listData = listDataChart, 
 		chartType = chartType, year = year) 
+
+@app.route('/viewChartSalary')
+def qeqHandler():
+	comparator = request.args['comparator']
+	chartType = request.args['chartType']
+	listYears = request.args.getlist('years[]')
+	lenListData = 1 + len(listYears)
+	listData = db.selectAverageSalary(comparator, listYears)
+	listDataChart = []
+	for i in range(0, lenListData):
+		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
+	return jsonify({'listYears':listYears, 'listDataChart':listDataChart, 'chartType':chartType})

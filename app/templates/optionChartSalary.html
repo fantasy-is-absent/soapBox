@@ -7,7 +7,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-2">
-            <form name = "form" method="POST">
+            <form name = "form">
                 <label>Select type of chart</label>
 
                 <select name="chartType" class="form-control">
@@ -50,11 +50,11 @@
                     <input type="checkbox" name="years" value="{{ year }}">{{ year }}<br>
                 {% endfor %}
 
-                <button type="submit" class="btn btn-default"> VIEW CHART </button>
+                <button type="button" > VIEW CHART </button>
             </form>
         </div>
        
-        <script  src="{{ url_for('static', filename='js/checkboxControl.js') }}"></script>
+        <script  src="{{ url_for('static', filename='js/viewChartSalary.js') }}"></script>
         
         <div class="col-md-9">
             <canvas id="popChart"></canvas>
