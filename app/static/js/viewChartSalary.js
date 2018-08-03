@@ -1,38 +1,39 @@
-
 $("button").on('click', function() {
 	var listYears = $('input[name="years"]:checked').map(function () {
-    			return this.value;
-    		}).get();
+		return this.value;
+	}).get();
 	$.getJSON('/viewChartSalary', { 
-		chartType: $('select[name="chartType"]').val(),
 		comparator: $('select[name="comparator"]').val(),
 		years: listYears,
 	}, function(data) {
-		chart(data.chartType, data.listDataChart);
-    });
- });
+		chart(data.listData, data.listComparator, data.listYears);
+	});
+});
 
-function chart(chartType, listDataChart){
-	var popCanvas = document.getElementById("popChart");    
-    var barChart = new Chart(popCanvas, {
-        type: chartType,    
-        data: {
-        	labels: listDataChart[0],  
-            datasets: [
-                        {
-                            fill: true,
-                            
-                            label: "average salary for",
-                            
-                            data: listDataChart[1],
-                            
-                            borderWidth: 1,
-                            
-                            borderColor:  'rgba(225, 225, 225, 1)',
-                            
-                            backgroundColor:  'rgba(225, 225, 225, 0.4)',
-                        }
-                ]
-            }
-        });
+function chart(listData, listComparator, listYears){
+	var listDatasets = [];
+	for(var i = 0; i < listData.length; i++){
+		listDatasets[listDatasets.length] = {
+			fill: true,
+			label: 'average salary for ' + listYears[i],
+			data: listData[i],
+			borderWidth: 1,  
+			borderColor:  'rgba(' + randomInteger(0, 225) + ', ' + randomInteger(0, 225) + ', ' + randomInteger(0, 225) + ', 1)',
+			backgroundColor:  'rgba(' + randomInteger(0, 225) + ', ' + randomInteger(0, 225) + ', ' + randomInteger(0, 225) + ', 0.6)',
+		}
+	}
+	var popCanvas = document.getElementById("popChart");
+	var barChart = new Chart(popCanvas, {
+		type: 'bar',
+		data: {
+			labels: listComparator,  
+			datasets: listDatasets,
+		}
+	});
+}
+
+function randomInteger(min, max) {
+	var rand = min - 0.5 + Math.random() * (max - min + 1)
+	rand = Math.round(rand);
+	return rand;
 }

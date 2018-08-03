@@ -14,44 +14,25 @@ def home():
 
 
 @app.route('/viewData')
-
 def viewDataStart():
 	return render_template('viewDataStart.html', listAllYears = listAllYears)
 
 
 @app.route('/viewData/<string:year>')
-
 def viewData(year = ''):
 	return render_template('viewData.html', db = db.selectData(year), listAllYears = listAllYears)
 
 
-@app.route('/viewSalary', methods=['GET', 'POST'])
-
+@app.route('/viewSalary')
 def viewOptionChartSalary():
 	return render_template('optionChartSalary.html', listAllYears = listAllYears)
 
 
-@app.route('/viewSalary', methods=['POST'])
-
-def viewChartSalary():
-	comparator = request.form['comparator']
-	chartType = request.form['chartType']
-	listYears = request.form.getlist('years')
-	lenListData = 1 + len(listYears)
-	listData = db.selectAverageSalary(comparator, listYears)
-	listDataChart = []
-	for i in range(0, lenListData):
-		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
-	return render_template('viewChartSalary.html', listAllYears = listAllYears, listYears = listYears, 
-		listData = listDataChart, chartType = chartType)
-
 @app.route('/viewStatistics', methods = ['GET'])
-
 def viewOptionChartStatistics():
 	return render_template('optionChartStatistics.html', listAllYears = listAllYears)
 
 @app.route('/viewStatistics', methods = ['POST'])
-
 def viewChartStatistics():
 	comparator = request.form['comparator']
 	chartType = request.form['chartType']
@@ -62,13 +43,11 @@ def viewChartStatistics():
 		chartType = chartType, year = year) 
 
 @app.route('/viewChartSalary')
-def qeqHandler():
-	comparator = request.args['comparator']
-	chartType = request.args['chartType']
+def viewChartSalary():
 	listYears = request.args.getlist('years[]')
 	lenListData = 1 + len(listYears)
-	listData = db.selectAverageSalary(comparator, listYears)
+	listData = db.selectAverageSalary(request.args['comparator'], listYears)
 	listDataChart = []
 	for i in range(0, lenListData):
 		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
-	return jsonify({'listYears':listYears, 'listDataChart':listDataChart, 'chartType':chartType})
+	return jsonify({'listYears':listYears, 'listData':listDataChart[1:], 'listComparator':listDataChart[0]})
