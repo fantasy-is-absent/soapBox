@@ -1,3 +1,5 @@
+var barChart;
+
 $("button").on('click', function() {
 	var listYears = $('input[name="years"]:checked').map(function () {
 		return this.value;
@@ -22,8 +24,13 @@ function chart(listData, listComparator, listYears){
 			backgroundColor:  'rgba(' + randomInteger(0, 225) + ', ' + randomInteger(0, 225) + ', ' + randomInteger(0, 225) + ', 0.6)',
 		}
 	}
+
+	if (barChart) {
+        barChart.destroy();
+    }
+
 	var popCanvas = document.getElementById("popChart");
-	var barChart = new Chart(popCanvas, {
+	barChart = new Chart(popCanvas, {
 		type: 'bar',
 		data: {
 			labels: listComparator,  
