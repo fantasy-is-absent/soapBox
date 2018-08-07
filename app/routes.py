@@ -1,26 +1,33 @@
 from app import app
 from flask import Flask, render_template, request, url_for, jsonify
-#from functools import wraps
-#from werkzeug.datastructures import MultiDict, ImmutableMultiDict
+from flask_paginate import Pagination, get_page_args
 
 from dataBase.dataBase import DataBase
+
 
 db = DataBase()
 listAllYears = [x for x in range(2011, 2019)] 
 
 @app.route('/')
 def home():
-    return render_template('home.html')
-
+	return render_template('home.html')
 
 @app.route('/viewData')
-def viewDataStart():
-	return render_template('viewDataStart.html', listAllYears = listAllYears)
-
-
 @app.route('/viewData/<string:year>')
-def viewData(year = ''):
-	return render_template('viewData.html', db = db.selectData(year), listAllYears = listAllYears)
+def viewData(year = 'allData'):
+	page, per_page, offset = get_page_args()
+	d = db.selectData(year, offset, per_page)
+	pagination = Pagination(page=page, 
+							total=db.countData(year), 
+							search=False, 
+							record_name='d', 
+							css_framework='bootstrap3')
+	return render_template('viewData.html', 
+							d = d, 
+							listAllYears = listAllYears, 
+							pagination=pagination,
+							page=page,
+							per_page=per_page)
 
 
 @app.route('/viewSalary')

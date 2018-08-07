@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
+{{ pagination.links }}
 	<div class="table-responsive">
 		<table class="table table-bordered table-hover ">
 			<thead>
 				<tr>
+					<th>#</th>
 					<th>
 						TOWN
 					</th>
@@ -32,8 +34,9 @@
 			</thead>
 
 			<tbody>
-				{% for row in db %}
+				{% for row in d %}
 					<tr>
+						<td>{{ loop.index + (page - 1) * per_page }}</td>
 						<td>
 							{{ row[0] }}
 						</td>

@@ -6,13 +6,21 @@ class DataBase:
 		self.conn = psycopg2.connect("dbname='mydb' user='postgres' host='localhost' password='postgres'")
 		self.cursor = self.conn.cursor()
 
-	def selectData(self, year):
+	def countData(self, year):
 		if year == 'allData':
-			request = "SELECT town, salary, post, experience, lenguage FROM all_data;"
+			request = "SELECT count(*) FROM all_data;"
 		else:
-			request = "SELECT town, salary, post, experience, lenguage FROM all_data WHERE year = " + year + ";"
+			request = "SELECT count(*) FROM all_data WHERE year = {};".format(year)
 		self.cursor.execute(request)
-		return list(self.cursor)
+		return self.cursor.fetchone()[0]
+
+	def selectData(self, year, offset, limit):
+		if year == 'allData':
+			request = "SELECT town, salary, post, experience, lenguage FROM all_data ORDER BY town, salary, experience limit {} offset {};".format(limit, offset)
+		else:
+			request = "SELECT town, salary, post, experience, lenguage FROM all_data WHERE year = " + year + "ORDER BY town, salary, experience limit {} offset {};".format(limit, offset)
+		self.cursor.execute(request)
+		return self.cursor.fetchall()
 
 	def selectAverageSalary(self,  nameColumn, listYears):
 		if listYears[0] == 'allYears':
