@@ -28,19 +28,15 @@ def viewOptionChartSalary():
 	return render_template('optionChartSalary.html', listAllYears = listAllYears)
 
 
-@app.route('/viewStatistics', methods = ['GET'])
+@app.route('/viewStatistics')
 def viewOptionChartStatistics():
 	return render_template('optionChartStatistics.html', listAllYears = listAllYears)
 
-@app.route('/viewStatistics', methods = ['POST'])
+@app.route('/viewChartStatistics')
 def viewChartStatistics():
-	comparator = request.form['comparator']
-	chartType = request.form['chartType']
-	year = request.form['year']
-	listData = db.selectDataSurvey(comparator, year)
+	listData = db.selectDataSurvey(request.args['comparator'], request.args['year'])
 	listDataChart = [[x[0] for x in listData], [x[1] for x in listData]]
-	return render_template('viewChartStatistics.html', listAllYears = listAllYears, listData = listDataChart, 
-		chartType = chartType, year = year) 
+	return jsonify({'listComparator':listDataChart[0], 'listData':listDataChart[1]})
 
 @app.route('/viewChartSalary')
 def viewChartSalary():
@@ -50,4 +46,6 @@ def viewChartSalary():
 	listDataChart = []
 	for i in range(0, lenListData):
 		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort
-	return jsonify({'listYears':listYears, 'listData':listDataChart[1:], 'listComparator':listDataChart[0]})
+	return jsonify({'listYears':listYears, 
+					'listData':listDataChart[1:], 
+					'listComparator':listDataChart[0]})
