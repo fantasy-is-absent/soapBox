@@ -2,10 +2,8 @@ from app import app
 from flask import Flask, render_template, request, url_for, jsonify
 from flask_paginate import Pagination, get_page_args
 
-from dataBase.dataBase import DataBase
+from dataBase.dataBase import *
 
-
-db = DataBase()
 listAllYears = [x for x in range(2011, 2019)] 
 
 @app.route('/')
@@ -16,9 +14,9 @@ def home():
 @app.route('/viewData/<string:year>')
 def viewData(year = 'allData'):
 	page, per_page, offset = get_page_args()
-	d = db.selectData(year, offset, per_page)
+	d = selectData(year, offset, per_page)
 	pagination = Pagination(page=page, 
-							total=db.countData(year), 
+							total=countData(year)[0][0], 
 							search=False, 
 							record_name='d', 
 							css_framework='bootstrap3')
@@ -34,14 +32,13 @@ def viewData(year = 'allData'):
 def viewOptionChartSalary():
 	return render_template('optionChartSalary.html', listAllYears = listAllYears)
 
-
 @app.route('/viewStatistics')
 def viewOptionChartStatistics():
 	return render_template('optionChartStatistics.html', listAllYears = listAllYears)
 
 @app.route('/viewChartStatistics')
 def viewChartStatistics():
-	listData = db.selectDataSurvey(request.args['comparator'], request.args['year'])
+	listData = selectDataSurvey(request.args['comparator'], request.args['year'])
 	listDataChart = [[x[0] for x in listData], [x[1] for x in listData]]
 	return jsonify({'listComparator':listDataChart[0], 'listData':listDataChart[1]})
 
@@ -49,7 +46,7 @@ def viewChartStatistics():
 def viewChartSalary():
 	listYears = request.args.getlist('years[]')
 	lenListData = 1 + len(listYears)
-	listData = db.selectAverageSalary(request.args['comparator'], listYears)
+	listData = selectAverageSalary(request.args['comparator'], listYears)
 	listDataChart = []
 	for i in range(0, lenListData):
 		listDataChart.append([x[i] for x in listData]) #div data on lists for comfort

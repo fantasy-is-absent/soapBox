@@ -1,7 +1,33 @@
-{% extends 'viewDataStart.html' %}
+{% extends 'navBar.html' %}
 
 {% block namePage %}
 	viewData
+{% endblock %}
+
+{% block addNavBar %}
+	<li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        	CHOUSE DATA 
+        	<span class="caret"></span>
+        </a>
+        
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        	{% for year in listAllYears %}
+				<li>
+					<a href="/viewData/{{ year }}">
+						{{ year }}
+					</a>
+				</li>
+			{% endfor %}
+            
+            <li>
+                    <a href="/viewData/allData">
+                        all data
+                    </a>
+            </li>
+
+        </ul>
+    </li>
 {% endblock %}
 
 {% block content %}
@@ -34,27 +60,27 @@
 			</thead>
 
 			<tbody>
-				{% for row in d %}
+				{% for data in d %}
 					<tr>
 						<td>{{ loop.index + (page - 1) * per_page }}</td>
 						<td>
-							{{ row[0] }}
+							{{ data[0] }}
 						</td>
 
 						<td>
-							{{ row[1] }}
+							{{ data[1] }}
 						</td>
 
 						<td>
-							{{ row[2] }}
+							{{ data[2] }}
 						</td>
 
 						<td>
-							{{ row[3] }}
+							{{ data[3] }}
 						</td>
 
 						<td>
-							{{ row[4] }}
+							{{ data[4] }}
 						</td>
 					</tr>
 				{% endfor %}
