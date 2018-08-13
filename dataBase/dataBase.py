@@ -1,9 +1,10 @@
 import psycopg2
 
+conn = psycopg2.connect("dbname='mydb' user='postgres' host='localhost' password='postgres'")
+cursor = conn.cursor()
+
 def cursoreExecute(func):
 	def function(*args):
-		conn = psycopg2.connect("dbname='mydb' user='postgres' host='localhost' password='postgres'")
-		cursor = conn.cursor()
 		cursor.execute(func(*args))
 		return cursor.fetchall()
 	return function
