@@ -1,5 +1,5 @@
 gunicorn
-Flask
+flask
 flask_paginate
 psycopg2
 psycopg2-binary
