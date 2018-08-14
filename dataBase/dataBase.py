@@ -1,6 +1,9 @@
 import psycopg2
-
-conn = psycopg2.connect("dbname='mydb' user='postgres' host='localhost' password='postgres'")
+import os
+import urllib.parse as urlparse
+DATABASE_URL = "postgres://imneaqtbmfyckf:54ee8fce2b27742c1319d10abbcd4a31212fe6450e90813816b53d53dca4e1da@ec2-50-16-196-138.compute-1.amazonaws.com:5432/dfvpmka7o9sl1l"
+url = urlparse.urlparse(DATABASE_URL)
+conn = psycopg2.connect(f"dbname='{url.path[1:]}' user='{url.username}' host='{url.hostname}' password='{url.password}'")
 cursor = conn.cursor()
 
 def cursoreExecute(func):
