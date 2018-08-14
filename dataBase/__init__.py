@@ -1,1 +1,1 @@
-import dataBase
+from dataBase import *
