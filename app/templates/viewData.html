@@ -5,38 +5,38 @@
 {% endblock %}
 
 {% block addNavBar %}
-	<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        	CHOUSE DATA 
-        	<span class="caret"></span>
-        </a>
-        
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        	{% for year in listAllYears %}
-				<li>
-					<a href="/viewData/{{ year }}">
-						{{ year }}
-					</a>
-				</li>
-			{% endfor %}
-            
-            <li>
-                    <a href="/viewData/allData">
-                        all data
-                    </a>
-            </li>
+	<li class="nav-item dropdown">
+		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			CHOUSE DATA 
+		
+			<span class="caret"></span>
+		</a>
 
-        </ul>
-    </li>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			{% for year in listAllYears %}
+				<a class="dropdown-item" href="/viewData/{{ year }}">
+					{{ year }}
+				</a>
+			{% endfor %}
+
+			<a class="dropdown-item" href="/viewData/allData">
+				all data
+			</a>
+		</div>
+	</li>
+
+	<li class="nav-item">{{ pagination.links }}</li>
 {% endblock %}
 
 {% block content %}
-{{ pagination.links }}
 	<div class="table-responsive">
 		<table class="table table-bordered table-hover ">
 			<thead>
 				<tr>
-					<th>#</th>
+					<th>
+						#
+					</th>
+					
 					<th>
 						TOWN
 					</th>
@@ -62,7 +62,8 @@
 			<tbody>
 				{% for data in d %}
 					<tr>
-						<td>{{ loop.index + (page - 1) * per_page }}</td>
+						<td>
+							{{ loop.index + (page - 1) * per_page }}</td>
 						<td>
 							{{ data[0] }}
 						</td>

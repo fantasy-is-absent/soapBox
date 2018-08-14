@@ -19,7 +19,7 @@ def viewData(year = 'allData'):
 							total=countData(year)[0][0], 
 							search=False, 
 							record_name='d', 
-							css_framework='bootstrap3')
+							css_framework='bootstrap4')
 	return render_template('viewData.html', 
 							d = d, 
 							listAllYears = listAllYears, 

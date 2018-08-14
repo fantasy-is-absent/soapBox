@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block content %}
+    <Br>
     <div class="row">
         <div class="col-md-2">
+            <Br>
             <form name = "form" method="POST">
                 <label>Select type of data</label>
 
@@ -40,14 +42,14 @@
                     <input type="radio" name="year" value="{{ year }}" required>{{ year }}<br>
                 {% endfor %}
 
-                <button type="button" class="btn btn-default"> VIEW CHART </button>
+                <button type="button"> VIEW CHART </button>
             </form>
         </div>
 
         <script  src="{{ url_for('static', filename='js/viewChartStatistics.js') }}"></script>
 
         <div class="col-md-9">
-            <canvas id="popChart" height="50" width="50"></canvas>
+            <canvas id="popChart" width="668" height="334" style="display: block; width: 668px; height: 334px;"></canvas>
         </div>
     </div>
 {% endblock %}

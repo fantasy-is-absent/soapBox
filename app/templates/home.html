@@ -5,22 +5,25 @@
 {% endblock %}
 
 {% block addNavBar %}
-	<li><a href="/viewData">VIEW DATA</a></li>
-	<li><a href="/viewSalary">VIEW SALARY</a></li>
-	<li><a href="/viewStatistics">VIEW STATISTICS</a></li>
+	<li class="nav-item"><a class="nav-link" href="/viewData">VIEW DATA</a></li>
+	<li class="nav-item"><a class="nav-link" href="/viewSalary">VIEW SALARY</a></li>
+	<li class="nav-item"><a class="nav-link" href="/viewStatistics">VIEW STATISTICS</a></li>
 {% endblock %}
 
 {% block content %}
-    <div class="row">	
-    	<form>
-        	<div class="col-md-2"></div>
-        
-        	<div class="col-md-4">
-        		<h1>Fill out your data</h1>
-			
-				<label>Town</label>
+	<Br>
 
-				<input  class="form-control" list="towns" name="town" placeholder="town" >
+	<h1 align="center">Fill out your data</h1>
+
+	<Br>
+
+	<div class="row">
+		<div class="col-md-2"></div>
+		
+		<div class="col-md-3">
+			<form>
+				<label>Town</label>
+				<input  class="form-control" list="towns" name="town" required>
 				
 				<datalist id="towns">
 					{% for town in ['Винница', 'Днепр', 'Донецк', 'Другой', 'Житомир', 'Запорожье', 'Ивано-Франковск', 'Киев', 'Кировоград', 'Кропивницкий', 'Луганск', 'Луцк', 'Львов', 'Мариуполь', 'Николаев', 'Одесса', 'Полтава', 'Ровно', 'Севастополь', 'Симферополь', 'Сумы', 'Тернополь', 'Тирасполь', 'Удаленно', 'Ужгород', 'Харьков', 'Херсон', 'Хмельницкий', 'Черкассы', 'Чернигов', 'Черновцы'] %}
@@ -29,15 +32,12 @@
 				</datalist>
  
 				<label>Salary</label>
-				
 				<input type="number" class="form-control" name="salary" required>
 
 				<label>Change salary for last year</label>
-				
 				<input type="number" class="form-control" name="changesalary" required>
 
 				<label>Post in company</label>
-				
 				<input type="text" class="form-control" list="posts" name="post" required>
 
 				<datalist id="posts">
@@ -47,15 +47,14 @@
 				</datalist>
 
 				<label>Experience in IT</label>
-				
 				<input type="number" class="form-control" name="experience" required>
 
 				<label>Experience on current post</label>
-				
 				<input type="number" class="form-control" name="currentexperience" required>
+		</div>
 
+ 		<div class="col-md-3">
 				<label>Programing lenguage</label>
-				
 				<input type="text" class="form-control" list="lenguages" name="lenguage" required>
 
 				<datalist id="lenguages">
@@ -65,7 +64,6 @@
 				</datalist>
 
 				<label>Specialization</label>
-				
 				<input type="text" class="form-control" list="specializations" name="specialization" required>
 
 				<datalist id="specializations">
@@ -73,15 +71,11 @@
 						<option value="{{ specialization }}">{{ specialization }}</option>
 					{% endfor %}
 				</datalist>
-			</div>
- 		
- 			<div class="col-md-4">
- 				<label>Age</label>
-				
+
+				<label>Age</label>
 				<input type="number" class="form-control" name="age" required>
 
 				<label>Sex</label>
-
 				<select class="form-control" name="sex">
 					<option value="женский">женский</option>
 
@@ -89,7 +83,6 @@
 				</select>
 				
 				<label>Education</label>
-
 				<select class="form-control" name="education">
 					{% for part in ['Высшее', 'Два высших', 'Кандидат', 'Незаконченное высшее', 'Среднее', 'Tехникум / Колледж'] %}
 						<option value="{{ part }}">{{ part }}</option>
@@ -97,7 +90,6 @@
 				</select>
 				
 				<label>University</label>
-				
 				<input type="text" class="form-control" list="universities" name="university" required>
 
 				<datalist id="universities">
@@ -105,9 +97,10 @@
 						<option id="{{ university }}">{{ university }}</option>
 					{% endfor %}
 				</datalist>
-				
+		</div>
+
+		<div class="col-md-3">
 				<label>Still student</label>
-				
 				<select class="form-control" name="stillstudent">
 					<option value="True">True</option>
 
@@ -115,15 +108,13 @@
 				</select>
 
 				<label>Level english</label>
-				
 				<select class="form-control" name="lvlenglish">
 					{% for part in ['выше среднего', 'ниже среднего', 'продвинутый', 'средний', 'элементарный'] %}
 						<option value="{{ part }}">{{ part }}</option>
 					{% endfor %}
 				</select>
-		
+
 				<label>Size company</label>
-				
 				<select class="form-control" name="sizecompany">
 					{% for part in ['до 10 человек', 'до 50 человек', 'до 200 человек', 'до 1000 человек', 'свыше 1000 человек'] %}
 						<option value="{{ part }}">{{ part }}</option>
@@ -131,27 +122,22 @@
 				</select>
 
 				<label>Type company</label>
-				
 				<select class="form-control" name="typecompany">
 					{% for part in ['Аутсорсинговая', 'Аутстаффинговая', 'Продуктовая', 'Стартап'] %}
 						<option value="{{ part }}">{{ part }}</option>
 					{% endfor %}
-					
+
 					<option disabled="--"></option>
 
 					<option value="Другая">Другая</option>
 				</select>
 
 				<label>Subject area company</label>
-				
 				<input type="text" class="form-control" name="subjectarea" required>
 
- 				<br>
-
- 				<button type="submit" class="btn btn-default"> SUBMIT </button>
-			</div>
-
- 			<div class="col-md-2"></div>
- 		</form>
- 	</div>
+				<br>
+				<button type="submit" class="btn btn-default"> SUBMIT </button>
+			</form>
+		</div>
+	</div>
 {% endblock %}
