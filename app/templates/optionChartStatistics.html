@@ -1,7 +1,10 @@
 {% extends 'navBar.html' %}
 
-{% block namePage %}
-    viewStatistics
+{% block addNavBar %}
+    <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+    <li class="nav-item"><a class="nav-link" href="/viewData">VIEW DATA</a></li>
+    <li class="nav-item"><a class="nav-link" href="/viewSalary">VIEW SALARY</a></li>
+    <li class="nav-item active"><a class="nav-link" href="/viewStatistics">VIEW STATISTICS</a></li>
 {% endblock %}
 
 {% block content %}

@@ -1,10 +1,10 @@
 {% extends 'navBar.html' %}
 
-{% block namePage %}
-	viewData
-{% endblock %}
-
 {% block addNavBar %}
+	<li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+	<li class="nav-item active"><a class="nav-link" href="/viewData">VIEW DATA</a></li>
+	<li class="nav-item"><a class="nav-link" href="/viewSalary">VIEW SALARY</a></li>
+	<li class="nav-item"><a class="nav-link" href="/viewStatistics">VIEW STATISTICS</a></li>
 	<li class="nav-item dropdown">
 		<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			CHOUSE DATA 
