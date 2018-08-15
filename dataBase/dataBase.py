@@ -31,9 +31,9 @@ def selectData(year, offset, limit):
 @cursoreExecute
 def selectAverageSalary(nameColumn, listYears):
 	if listYears[0] == 'allYears':
-		request = 'select y{1}.{0}, y{1}.av from (select distinct {0}, avg(salary) over (partition by {0}) as av from all_data) as y{1} where y{1}.av <> 0;'.format(nameColumn, listYears[0])
+		request = 'select y{1}.{0}, y{1}.av from (select distinct {0}, avg(salary) over (partition by {0}) as av from all_data) as y{1} where y{1}.{0} IS NOT NULL;'.format(nameColumn, listYears[0])
 	else:
-		request = 'select y{1}.{0}, y{1}.av from (select distinct {0}, avg(salary) over (partition by {0}) as av from all_data where year = {1}) as y{1} where y{1}.av <> 0;'.format(nameColumn, listYears[0])				
+		request = 'select y{1}.{0}, y{1}.av from (select distinct {0}, avg(salary) over (partition by {0}) as av from all_data where year = {1}) as y{1} where y{1}.{0} IS NOT NULL;'.format(nameColumn, listYears[0])				
 	if len(listYears) > 1:
 		for year in listYears[1:]:
 			request = request.replace(' from', ', y{0}.av from'.format(year), 1)
@@ -47,7 +47,7 @@ def selectAverageSalary(nameColumn, listYears):
 @cursoreExecute
 def selectDataSurvey(nameColumn, year):
 	if year == 'allYears':
-		request = 'select {0}, count({0}) from all_data group by {0};'.format(nameColumn)
+		request = 'select {0}, count({0}) from all_data where {0} is not null group by {0};'.format(nameColumn)
 	else:
-		request = 'select {0}, count({0}) from all_data where year = {1} group by {0};'.format(nameColumn, year)
+		request = 'select {0}, count({0}) from all_data where year = {1} and {0} is not null group by {0};'.format(nameColumn, year)
 	return request
